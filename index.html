@@ -29,22 +29,32 @@
         <!--PASSWORD-->
         <div class="mb-3">
             <label for="password" class="form-label">Password</label>
-            <input type="password" class="form-control" id="password" regitquired>
+            <input type="password" class="form-control" id="password">
         </div>
 
         <!--REPEAT PASSWORD-->
         <!-- VERIFY YOUR PASSWORD-->
 
         <div class="mb-3">
-            <label for="password2" class="form-label">Password</label>
-            <input type="password2" class="form-control" id="password2" required>
+            <label for="password2" class="form-label">Repeat Password</label>
+            <input type="password" class="form-control" id="password2">
         </div>
 
           <!--SUBMIT BUTTON-->
         <button id="mybutton" class="btn btn-primary">Submit</button>
       </form>
-<p id="alert"> </p>
-</div>
+      <div style="display: none;" class="alert alert-warning" role="alert" id="emptyfields">
+        Please fill all the fields!
+      </div>
+      <div style="display: none;" class="alert alert-danger" role="alert" id="wrongpassword">
+        Passwords are not matching.
+      </div>
+      <div style="display: none;" class="alert alert-success" role="alert" id="success">
+        Successfuly signed up. Welcome.
+    </div>
+    <div style="display: none;" class="alert alert-secondary" role="alert" id="shortpassword">
+        Password must be atleast 6 characters!
+      </div>
 
     <script type="text/javascript">
         // this is my jquery
@@ -55,7 +65,18 @@
                 var password = $("#password").val();
                 var password2 = $("#password2").val();
                 if(email == "" || password == "" || password2 == ""){
-                    $("#alert").html("Fill all areas"); //please make this descriptive
+                    $(".alert").hide();
+                    $("#emptyfields").show(); //please make this descriptive
+                }else if (password != password2){
+                    $(".alert").hide();
+                    $("#wrongpassword").show();
+                }else if(password.length<6){
+                    $(".alert").hide();
+                    $("#shortpassword").show();
+                }
+                else{
+                 $(".alert").hide();
+                $("#success").show();
                 }
             })
         })
